@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yun_flutter_component/page/tag_choice_page.dart';
 import 'package:yun_flutter_component/page/image_upload_page.dart';
 
 void main() {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         "/ImageUploadPage": (context) => ImageUploadPage(),
+        "/ChoiceChipPage": (context) => TagChoicePage(),
       }
     );
   }
@@ -43,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               _getTextButton("九宫格图片上传组件", "/ImageUploadPage"),
-              _getTextButton("组件2", "/TestPage"),
+              _getTextButton("标签选择组件", "/ChoiceChipPage"),
               _getTextButton("组件3", "/TestPage"),
               _getTextButton("组件4", "/TestPage"),
               _getTextButton("组件5", "/TestPage"),
