@@ -17,7 +17,7 @@ class _ImageUploadPageState extends State<ImageUploadPage> {
             title: Text(params["title"]),
             backgroundColor: Colors.teal
         ),
-        body: ImageUploadWidget(9)
+        body: ImageUploadWidget(maxNum: 3, needCompress: true)
     );
   }
 

@@ -1,18 +1,26 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_image/flutter_native_image.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImageUploadWidget extends StatefulWidget {
 
+  //最大上传图片数
   late int maxNum;
+  //是否需要剪裁图片
+  late bool needCut;
+  //是否需要压缩图片
+  late bool needCompress;
+
   late _ImageUploadWidgetState _imageUploadState;
 
-  ImageUploadWidget([this.maxNum = 9]);
+  ImageUploadWidget({this.maxNum = 9, this.needCut = false, this.needCompress = false});
 
   @override
   State<StatefulWidget> createState() {
-    this._imageUploadState = _ImageUploadWidgetState(this.maxNum);
+    this._imageUploadState = _ImageUploadWidgetState();
     return _imageUploadState;
   }
 
@@ -29,10 +37,17 @@ class ImageUploadWidget extends StatefulWidget {
 
 class _ImageUploadWidgetState extends State<ImageUploadWidget> {
 
-  int maxNum;
+  late int maxNum;
+  late bool needCut;
+  late bool needCompress;
   List<String> _imageList = <String>[];
 
-  _ImageUploadWidgetState(this.maxNum);
+  @override
+  void initState() {
+    this.maxNum = widget.maxNum;
+    this.needCut = widget.needCut;
+    this.needCompress = widget.needCompress;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -113,43 +128,43 @@ class _ImageUploadWidgetState extends State<ImageUploadWidget> {
         children: [
           //拍一张
           InkWell(
-            child: Container(
-              child: Text("拍一张"),
-              height: 40,
-              alignment: Alignment.center,
-            ),
-            onTap: () {
-              Navigator.of(context).pop();
-              _selectOnCamera();
-            }
+              child: Container(
+                child: Text("拍一张"),
+                height: 40,
+                alignment: Alignment.center,
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                _selectOnCamera();
+              }
           ),
           //分割线
           Divider(),
           //相册选择
           InkWell(
-            child: Container(
-              child: Text("相册选择"),
-              height: 40,
-              alignment: Alignment.center,
-            ),
-            onTap: () {
-              Navigator.of(context).pop();
-              _selectOnGallery();
-            }
+              child: Container(
+                child: Text("相册选择"),
+                height: 40,
+                alignment: Alignment.center,
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+                _selectOnGallery();
+              }
           ),
           Divider(
             height: 4,
             thickness: 4,
           ),
           InkWell(
-            child: Container(
-                alignment: Alignment.center,
-                child: Text("取消"),
-                height: 40
-            ),
-            onTap: () {
-              Navigator.of(context).pop();
-            }
+              child: Container(
+                  alignment: Alignment.center,
+                  child: Text("取消"),
+                  height: 40
+              ),
+              onTap: () {
+                Navigator.of(context).pop();
+              }
           )
         ],
       ),
@@ -159,19 +174,94 @@ class _ImageUploadWidgetState extends State<ImageUploadWidget> {
   Future _selectOnCamera() async {
     final ImagePicker _picker = ImagePicker();
     XFile? xFile = await _picker.pickImage(source: ImageSource.camera);
-    setState(() {
-      this._imageList.add(xFile!.path);
-    });
+    if (xFile != null) {
+      String filePath = "";
+      if (this.needCut) {
+        File? file = await _cropImage(xFile.path);
+        filePath = file!.path;
+      }
+      if (this.needCompress) {
+        ImageProperties properties = await FlutterNativeImage.getImageProperties(xFile.path);
+        File compressedFile = await FlutterNativeImage.compressImage(xFile.path,
+            quality: 80,
+            targetWidth: 800,
+            targetHeight: (properties.height! * 800 / properties.width!).round());
+        filePath = compressedFile.path;
+      }
+      setState(() {
+        this._imageList.add(filePath);
+      });
+    }
   }
 
   Future _selectOnGallery() async {
     final ImagePicker _picker = ImagePicker();
     List<XFile>? xFileList = await _picker.pickMultiImage();
-    setState(() {
-      for (XFile xFile in xFileList!) {
-        this._imageList.add(xFile.path);
+    for (XFile xFile in xFileList!) {
+      String filePath = "";
+      if (this.needCut) {
+        File? file = await _cropImage(xFile.path);
+        filePath = file!.path;
       }
-    });
+      if (this.needCompress) {
+        ImageProperties properties = await FlutterNativeImage.getImageProperties(xFile.path);
+        File compressedFile = await FlutterNativeImage.compressImage(xFile.path,
+            quality: 80,
+            targetWidth: 800,
+            targetHeight: (properties.height! * 800 / properties.width!).round());
+        filePath = compressedFile.path;
+      }
+      setState(() {
+        this._imageList.add(filePath);
+      });
+    }
+  }
+
+
+  Future<File?> _cropImage(String path, {title = '剪切图片'}) async {
+    List<CropAspectRatioPreset> presetList = [];
+    if (Platform.isAndroid) {
+      presetList = [
+        CropAspectRatioPreset.square,
+        //CropAspectRatioPreset.ratio3x2,
+        //CropAspectRatioPreset.original,
+        //CropAspectRatioPreset.ratio4x3,
+        //CropAspectRatioPreset.ratio16x9
+      ];
+    } else {
+      presetList = [
+        //CropAspectRatioPreset.original,
+        CropAspectRatioPreset.square,
+        // CropAspectRatioPreset.ratio3x2,
+        // CropAspectRatioPreset.ratio4x3,
+        // CropAspectRatioPreset.ratio5x3,
+        // CropAspectRatioPreset.ratio5x4,
+        // CropAspectRatioPreset.ratio7x5,
+        // CropAspectRatioPreset.ratio16x9
+      ];
+    }
+    File? file = await ImageCropper.cropImage(
+        sourcePath: path,
+        aspectRatioPresets: presetList,
+        androidUiSettings: AndroidUiSettings(
+            toolbarTitle: title,
+            toolbarColor: Colors.black87,
+            toolbarWidgetColor: Colors.white,
+            initAspectRatio: CropAspectRatioPreset.square,
+            lockAspectRatio: false
+        ),
+        iosUiSettings: IOSUiSettings(
+            title: title,
+            minimumAspectRatio: 1.0,
+            rectX: 0.0,
+            rectY: 0.0,
+            rectWidth: 320.0,
+            rectHeight: 320.0,
+            cancelButtonTitle: '取消',
+            doneButtonTitle: '确定'
+        )
+    );
+    return file;
   }
 
 }
