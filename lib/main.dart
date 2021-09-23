@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yun_flutter_component/page/avatar_upload_page.dart';
 import 'package:yun_flutter_component/page/tag_choice_page.dart';
 import 'package:yun_flutter_component/page/image_upload_page.dart';
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
       routes: {
         "/ImageUploadPage": (context) => ImageUploadPage(),
         "/ChoiceChipPage": (context) => TagChoicePage(),
+        "/AvatarUploadPage": (context) => AvatarUploadPage(),
       }
     );
   }
@@ -46,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               _getTextButton("九宫格图片上传组件", "/ImageUploadPage"),
               _getTextButton("标签选择组件", "/ChoiceChipPage"),
-              _getTextButton("组件3", "/TestPage"),
+              _getTextButton("头像上传组件", "/AvatarUploadPage"),
               _getTextButton("组件4", "/TestPage"),
               _getTextButton("组件5", "/TestPage"),
               _getTextButton("组件6", "/TestPage"),
