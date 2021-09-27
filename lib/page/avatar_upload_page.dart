@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yun_flutter_component/component/avatar_upload_widget.dart';
+import 'package:yun_flutter_component/utils/toast_util.dart';
 
 class AvatarUploadPage extends StatefulWidget {
 
@@ -17,7 +18,15 @@ class _AvatarUploadPageState extends State<AvatarUploadPage> {
         appBar: AppBar(
             toolbarHeight: 40,
             title: Text(params["title"]),
-            backgroundColor: Colors.teal
+            backgroundColor: Colors.teal,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  ToastUtil.showToast("刘运你哈呀");
+                },
+                icon: Icon(Icons.settings)
+              )
+            ],
         ),
         body: Container(
             padding: EdgeInsets.all(20),
