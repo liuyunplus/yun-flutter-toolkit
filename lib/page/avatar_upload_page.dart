@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yun_flutter_component/component/avatar_upload_widget.dart';
 import 'package:yun_flutter_component/utils/toast_util.dart';
+import 'package:yun_flutter_component/widget/avatar_upload_widget.dart';
 
 class AvatarUploadPage extends StatefulWidget {
 

@@ -64,7 +64,7 @@ class _TagChoiceWidgetState<T> extends State<TagChoiceWidget> {
             ),
           ),
           selected: selected,
-          backgroundColor: Colors.grey[350],
+          backgroundColor: Color.fromRGBO(255, 255, 255, 1),
           selectedColor: Colors.blue,
           onSelected: (selected) {
             setState(() {

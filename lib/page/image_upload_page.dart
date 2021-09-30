@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yun_flutter_component/component/image_upload_widget.dart';
+import 'package:yun_flutter_component/widget/image_upload_widget.dart';
 
 class ImageUploadPage extends StatefulWidget {
   @override

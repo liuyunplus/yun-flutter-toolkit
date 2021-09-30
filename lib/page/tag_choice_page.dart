@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yun_flutter_component/component/tag_choice_widget.dart';
+import 'package:yun_flutter_component/widget/tag_choice_widget.dart';
 
 
 class TagChoicePage extends StatefulWidget {
@@ -19,10 +19,13 @@ class _TagChoicePageState extends State<TagChoicePage> {
     return Scaffold(
         appBar: AppBar(
             toolbarHeight: 40,
+            centerTitle: true,
             title: Text(params["title"]),
-            backgroundColor: Colors.teal
+            backgroundColor: Color.fromRGBO(22, 186, 152, 1),
+            // elevation: 0,
         ),
-        body: buildBody()
+        body: buildBody(),
+        backgroundColor: Color.fromRGBO(245, 246, 248, 1),
     );
   }
 
@@ -42,10 +45,26 @@ class _TagChoicePageState extends State<TagChoicePage> {
         chipWidget,
         RaisedButton(
           child: Text('Button'),
+          color: Color.fromRGBO(255, 255, 255, 1),
           onPressed: (){
             String s = chipWidget.getSelected();
             print(s);
           },
+        ),
+        SizedBox(height: 10),
+        Container(
+          height: 40,
+          width: double.infinity,
+          alignment: Alignment.centerLeft,
+          color: Color.fromRGBO(255, 255, 255, 1),
+          child: Text("刘运"),
+        ),
+        Container(
+          height: 40,
+          width: double.infinity,
+          alignment: Alignment.centerLeft,
+          color: Color.fromRGBO(255, 255, 255, 1),
+          child: Text("哈哈"),
         )
       ],
     );
