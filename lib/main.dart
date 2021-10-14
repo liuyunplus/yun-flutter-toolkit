@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yun_flutter_component/page/avatar_upload_page.dart';
+import 'package:yun_flutter_component/page/card_item_list_page.dart';
 import 'package:yun_flutter_component/page/tag_choice_page.dart';
 import 'package:yun_flutter_component/page/image_upload_page.dart';
 
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         "/ImageUploadPage": (context) => ImageUploadPage(),
         "/ChoiceChipPage": (context) => TagChoicePage(),
         "/AvatarUploadPage": (context) => AvatarUploadPage(),
+        "/CardItemListPage": (context) => CardItemListPage(),
       }
     );
   }
@@ -49,7 +51,7 @@ class _MyHomePageState extends State<MyHomePage> {
               _getTextButton("九宫格图片上传组件", "/ImageUploadPage"),
               _getTextButton("标签选择组件", "/ChoiceChipPage"),
               _getTextButton("头像上传组件", "/AvatarUploadPage"),
-              _getTextButton("组件4", "/TestPage"),
+              _getTextButton("卡片列表组件", "/CardItemListPage"),
               _getTextButton("组件5", "/TestPage"),
               _getTextButton("组件6", "/TestPage"),
               _getTextButton("组件7", "/TestPage"),
