@@ -17,6 +17,8 @@ dependencies:
   dio: ^4.0.0
   fluttertoast: ^8.0.8
   flutter_easyrefresh: ^2.2.1
+  circular_menu : ^1.2.3
+  drag_container: ^0.0.1
 
 dev_dependencies:
   flutter_test:

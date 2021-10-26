@@ -12,11 +12,10 @@ class _CardItemListPageState extends State<CardItemListPage> {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> params = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 40,
-        title: Text(params["title"]),
+        title: Text("卡片列表组件"),
         backgroundColor: Colors.teal
       ),
       body: Container(

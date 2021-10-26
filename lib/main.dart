@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:yun_flutter_component/page/avatar_upload_page.dart';
 import 'package:yun_flutter_component/page/card_item_list_page.dart';
+import 'package:yun_flutter_component/page/float_box_widget_page.dart';
+import 'package:yun_flutter_component/page/my_test2_page.dart';
+import 'package:yun_flutter_component/page/my_test_page.dart';
 import 'package:yun_flutter_component/page/tag_choice_page.dart';
 import 'package:yun_flutter_component/page/image_upload_page.dart';
+import 'package:yun_flutter_component/utils/navigator_util.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,13 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: MyHomePage(),
-      debugShowCheckedModeBanner: false,
-      routes: {
-        "/ImageUploadPage": (context) => ImageUploadPage(),
-        "/ChoiceChipPage": (context) => TagChoicePage(),
-        "/AvatarUploadPage": (context) => AvatarUploadPage(),
-        "/CardItemListPage": (context) => CardItemListPage(),
-      }
+      debugShowCheckedModeBanner: false
     );
   }
 
@@ -43,30 +41,19 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text("Flutter组件列表"),
         backgroundColor: Colors.teal
       ),
-      body: Center(
+      body: Container(
+        alignment: Alignment.topCenter,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              _getTextButton("九宫格图片上传组件", "/ImageUploadPage"),
-              _getTextButton("标签选择组件", "/ChoiceChipPage"),
-              _getTextButton("头像上传组件", "/AvatarUploadPage"),
-              _getTextButton("卡片列表组件", "/CardItemListPage"),
-              _getTextButton("组件5", "/TestPage"),
-              _getTextButton("组件6", "/TestPage"),
-              _getTextButton("组件7", "/TestPage"),
-              _getTextButton("组件8", "/TestPage"),
-              _getTextButton("组件9", "/TestPage"),
-              _getTextButton("组件10", "/TestPage"),
-              _getTextButton("组件11", "/TestPage"),
-              _getTextButton("组件12", "/TestPage"),
-              _getTextButton("组件13", "/TestPage"),
-              _getTextButton("组件15", "/TestPage"),
-              _getTextButton("组件16", "/TestPage"),
-              _getTextButton("组件17", "/TestPage"),
-              _getTextButton("组件18", "/TestPage"),
-              _getTextButton("组件19", "/TestPage"),
-              _getTextButton("组件20", "/TestPage"),
+              _getTextButton("九宫格图片组件", ImageUploadPage()),
+              _getTextButton("标签选择组件", TagChoicePage()),
+              _getTextButton("头像上传组件", AvatarUploadPage()),
+              _getTextButton("卡片列表组件", CardItemListPage()),
+              _getTextButton("滑动滑块组件", FloatBoxWidgetPage()),
+              _getTextButton("测试组件1", MyTestPage()),
+              _getTextButton("测试组件2", MyTest2Page()),
             ],
           ),
         )
@@ -74,11 +61,15 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-  Widget _getTextButton(String title, String linkPage) {
+  Widget _getTextButton(String title, Widget page) {
     return TextButton(
-      child: Text(title),
+      style: TextButton.styleFrom(
+        backgroundColor: Colors.teal,
+        fixedSize: Size(200, 35)
+      ),
+      child: Text(title, style: TextStyle(color: Colors.white)),
       onPressed: () {
-        Navigator.pushNamed(context, linkPage, arguments: {"title": title});
+        NavigatorUtil.push(context, page);
       },
     );
   }

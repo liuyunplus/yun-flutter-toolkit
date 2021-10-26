@@ -15,12 +15,11 @@ class _TagChoicePageState extends State<TagChoicePage> {
 
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> params = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
         appBar: AppBar(
             toolbarHeight: 40,
             centerTitle: true,
-            title: Text(params["title"]),
+            title: Text("标签选择组件"),
             backgroundColor: Color.fromRGBO(22, 186, 152, 1),
             // elevation: 0,
         ),
@@ -31,14 +30,6 @@ class _TagChoicePageState extends State<TagChoicePage> {
 
   Widget buildBody() {
     List<String> list = ["四度空间", "受到广泛", "对方尴尬", "瑞特"];
-    // Map<String, String> map = {
-    //   "0": "报BUG",
-    //   "1": "界面设计",
-    //   "2": "功能设计",
-    //   "3": "业务运营",
-    //   "4": "点个赞",
-    //   "5": "吐下槽"
-    // };
     TagChoiceWidget<String> chipWidget = TagChoiceWidget(itemList: list);
     return Column(
       children: <Widget>[
