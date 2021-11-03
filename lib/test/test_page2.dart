@@ -2,14 +2,14 @@ import 'package:drag_container/drag/drag_container.dart';
 import 'package:drag_container/drag_container.dart';
 import 'package:flutter/material.dart';
 
-class MyTest2Page extends StatefulWidget {
+class TestPage2 extends StatefulWidget {
 
   @override
-  State<StatefulWidget> createState() => _MyTest2PageState();
+  State<StatefulWidget> createState() => _TestPage2State();
 
 }
 
-class _MyTest2PageState extends State<MyTest2Page> {
+class _TestPage2State extends State<TestPage2> {
 
   ///滑动控制器
   ScrollController scrollController = new ScrollController();

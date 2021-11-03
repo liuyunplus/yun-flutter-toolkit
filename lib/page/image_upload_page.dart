@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yun_flutter_component/widget/image_upload_widget.dart';
+import 'package:yun_flutter_component/widget/multi_image_select_widget.dart';
 
 class ImageUploadPage extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _ImageUploadPageState extends State<ImageUploadPage> {
             title: Text("图片上传组件"),
             backgroundColor: Colors.teal
         ),
-        body: ImageUploadWidget(maxNum: 3, needCompress: true)
+        body: MultiImageSelectWidget(maxNum: 3)
     );
   }
 

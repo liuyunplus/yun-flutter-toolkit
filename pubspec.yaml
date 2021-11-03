@@ -19,6 +19,8 @@ dependencies:
   flutter_easyrefresh: ^2.2.1
   circular_menu : ^1.2.3
   drag_container: ^0.0.1
+  intl: ^0.17.0
+  flutter_cupertino_datetime_picker: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -26,3 +28,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: myIcons
+      fonts:
+        - asset: assets/fonts/iconfont.ttf

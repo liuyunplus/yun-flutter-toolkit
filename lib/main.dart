@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:yun_flutter_component/page/avatar_upload_page.dart';
 import 'package:yun_flutter_component/page/card_item_list_page.dart';
 import 'package:yun_flutter_component/page/float_box_widget_page.dart';
-import 'package:yun_flutter_component/page/my_test2_page.dart';
-import 'package:yun_flutter_component/page/my_test_page.dart';
+import 'package:yun_flutter_component/test/test_page2.dart';
+import 'package:yun_flutter_component/test/test_page1.dart';
 import 'package:yun_flutter_component/page/tag_choice_page.dart';
 import 'package:yun_flutter_component/page/image_upload_page.dart';
+import 'package:yun_flutter_component/test/test_page3.dart';
+import 'package:yun_flutter_component/test/test_page4.dart';
+import 'package:yun_flutter_component/test/test_page5.dart';
 import 'package:yun_flutter_component/utils/navigator_util.dart';
 
 void main() {
@@ -52,8 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
               _getTextButton("头像上传组件", AvatarUploadPage()),
               _getTextButton("卡片列表组件", CardItemListPage()),
               _getTextButton("滑动滑块组件", FloatBoxWidgetPage()),
-              _getTextButton("测试组件1", MyTestPage()),
-              _getTextButton("测试组件2", MyTest2Page()),
+              _getTextButton("测试组件1", TestPage1()),
+              _getTextButton("测试组件2", TestPage2()),
+              _getTextButton("测试组件3", TestPage3()),
+              _getTextButton("测试组件4", TestPage4()),
+              _getTextButton("测试组件5", TestPage5()),
             ],
           ),
         )
