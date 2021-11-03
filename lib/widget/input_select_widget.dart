@@ -1,49 +1,64 @@
 import 'package:flutter/material.dart';
 
+enum InputType {
+  TextInput, BottomModal
+}
+
+const Color black65 = Color(0xA5000000);
+
 class InputSelectWidget extends StatefulWidget {
 
   late String title;
   late double titleSize;
   late Color titleColor;
   late double titleAreaWidth;
+  late bool required;
   String? hintText;
   late double hintTextSize;
   String? content;
   late double contentSize;
-  late double maxHeight;
+  late double maxModalHeight;
   Widget? tailing;
   Function()? onTap;
-  late int inputType;
-  List<Widget> Function()? menuBuilder;
+  late InputType inputType;
+  late bool modalDismissible;
+  Widget Function()? modalBuilder;
+  TextEditingController? controller;
 
   InputSelectWidget({
     required String title,
     double titleSize = 16,
-    Color titleColor = Colors.black87,
+    Color titleColor = black65,
     double titleAreaWidth = 80,
+    bool required = false,
     String? hintText,
     double hintTextSize = 15,
     String? content,
     double contentSize = 16,
-    double maxHeight = 300,
+    double maxModalHeight = 500,
     Widget? tailing,
     Function()? onTap,
-    int inputType = 1,
-    List<Widget> Function()? menuBuilder
+    InputType inputType = InputType.TextInput,
+    bool modalDismissible = true,
+    Widget Function()? modalBuilder,
+    TextEditingController? controller
   }) {
     this.title = title;
     this.titleSize = titleSize;
     this.titleColor = titleColor;
     this.titleAreaWidth = titleAreaWidth;
+    this.required = required;
     this.hintText = hintText;
     this.hintTextSize = hintTextSize;
     this.content = content;
     this.contentSize = contentSize;
-    this.maxHeight = maxHeight;
+    this.maxModalHeight = maxModalHeight;
     this.tailing = tailing;
     this.onTap = onTap;
     this.inputType = inputType;
-    this.menuBuilder = menuBuilder;
+    this.modalDismissible = modalDismissible;
+    this.modalBuilder = modalBuilder;
+    this.controller = controller;
   }
 
   @override
@@ -56,7 +71,7 @@ class _InputSelectWidgetState extends State<InputSelectWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.only(left: 20, right: 20),
+        padding: EdgeInsets.only(left: 10, right: 10),
         color: Colors.white,
         child: IntrinsicHeight(
             child: Row(
@@ -65,10 +80,15 @@ class _InputSelectWidgetState extends State<InputSelectWidget> {
                   Container(
                       width: widget.titleAreaWidth,
                       alignment: Alignment.centerLeft,
-                      child: Text(widget.title, style: TextStyle(fontSize: widget.titleSize, color: widget.titleColor))
+                      child: Row(
+                        children: [
+                          Text(widget.title, style: TextStyle(fontSize: widget.titleSize, color: widget.titleColor)),
+                          Text(widget.required?" *":"", style: TextStyle(fontSize: widget.titleSize, color: Colors.red))
+                        ],
+                      )
                   ),
                   Expanded(
-                      child: widget.inputType == 1 ? _buildTextInput() : _buildSelectInput()
+                      child: widget.inputType == InputType.TextInput ? _buildTextInput() : _buildBottomModal()
                   )
                 ]
             )
@@ -77,14 +97,23 @@ class _InputSelectWidgetState extends State<InputSelectWidget> {
   }
 
   Widget _getContentText() {
+    String text;
+    TextStyle style;
     if (widget.content == null) {
-      return Text(widget.hintText??"", style: TextStyle(fontSize: widget.hintTextSize, color: Colors.grey));
+      text = widget.hintText??"";
+      style = TextStyle(fontSize: widget.hintTextSize, color: Colors.grey);
+    } else {
+      text = widget.content??"";
+      style = TextStyle(fontSize: widget.contentSize);
     }
-    return Text(widget.content??"", style: TextStyle(fontSize: widget.contentSize));
+    return Expanded(
+      child: Text(text, overflow: TextOverflow.ellipsis, style: style),
+    );
   }
 
   Widget _buildTextInput() {
     return TextField(
+      controller: widget.controller,
       maxLines: 1,
       decoration: InputDecoration(
           hintText: widget.hintText,
@@ -100,7 +129,7 @@ class _InputSelectWidgetState extends State<InputSelectWidget> {
     );
   }
 
-  Widget _buildSelectInput() {
+  Widget _buildBottomModal() {
     return GestureDetector(
         child: Container(
             padding: EdgeInsets.only(top: 15, bottom: 15),
@@ -110,32 +139,28 @@ class _InputSelectWidgetState extends State<InputSelectWidget> {
                 children: [
                   Text("", style: TextStyle(fontSize: widget.contentSize)),
                   _getContentText(),
-                  Spacer(),
                   widget.tailing??Text("")
                 ]
             )
         ),
         onTap: widget.onTap != null ? widget.onTap : () {
-          showSelectMenu();
+          showBottomModal();
         }
     );
   }
 
-  void showSelectMenu() {
+  void showBottomModal() {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
+      isDismissible: widget.modalDismissible,
+      backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
         return Container(
-          constraints: BoxConstraints(
-              maxHeight: widget.maxHeight
-          ),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: widget.menuBuilder!()
-            )
-          )
+            constraints: BoxConstraints(
+                maxHeight: widget.maxModalHeight
+            ),
+            child: widget.modalBuilder!()
         );
       }
     );

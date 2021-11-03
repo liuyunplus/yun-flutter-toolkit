@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:yun_flutter_component/utils/colors_util.dart';
 
-class TestPage4 extends StatefulWidget {
+class CardItemListPage2 extends StatefulWidget {
 
   @override
-  State<StatefulWidget> createState() => _TestPage4State();
+  State<StatefulWidget> createState() => _CardItemListPage2State();
 
 }
 
-class _TestPage4State extends State<TestPage4> {
+class _CardItemListPage2State extends State<CardItemListPage2> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
             toolbarHeight: 40,
-            title: Text("测试组件4"),
+            title: Text("卡片列表页面2"),
             backgroundColor: Colors.teal
         ),
         backgroundColor: ColorsUtil.hexColor(0xEFEFEF),
@@ -50,11 +50,9 @@ class _TestPage4State extends State<TestPage4> {
           children: [
             Container(
               width: 140,
+              padding: EdgeInsets.only(top: 5, bottom: 5, left: 5),
               child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(5),
-                      bottomLeft: Radius.circular(5)
-                  ),
+                  borderRadius: BorderRadius.all(Radius.circular(5)),
                   child: Image.network(_getImage(index), fit: BoxFit.cover)
               ),
             ),

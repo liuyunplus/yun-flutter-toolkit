@@ -16,7 +16,29 @@ class _ImageUploadPageState extends State<ImageUploadPage> {
             title: Text("图片上传组件"),
             backgroundColor: Colors.teal
         ),
-        body: MultiImageSelectWidget(maxNum: 3)
+        body: _buildBody()
+    );
+  }
+
+  Widget _buildBody() {
+    return Container(
+      padding: EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: 40,
+            alignment: Alignment.centerLeft,
+            child: Text("九张图片", style: TextStyle(fontSize: 16)),
+            color: Colors.white,
+          ),
+          Container(
+            alignment: Alignment.centerLeft,
+            color: Colors.grey,
+            child: MultiImageSelectWidget(maxNum: 9, lineItemNum: 3)
+          )
+        ]
+      )
     );
   }
 

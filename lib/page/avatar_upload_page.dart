@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yun_flutter_component/utils/toast_util.dart';
+import 'package:yun_flutter_component/utils/colors_util.dart';
 import 'package:yun_flutter_component/widget/avatar_upload_widget.dart';
 
 class AvatarUploadPage extends StatefulWidget {
@@ -17,21 +17,13 @@ class _AvatarUploadPageState extends State<AvatarUploadPage> {
         appBar: AppBar(
             toolbarHeight: 40,
             title: Text("头像上传组件"),
-            backgroundColor: Colors.teal,
-            actions: [
-              IconButton(
-                onPressed: () {
-                  ToastUtil.showToast("刘运你哈呀");
-                },
-                icon: Icon(Icons.settings)
-              )
-            ],
+            backgroundColor: Colors.teal
         ),
         body: Container(
             padding: EdgeInsets.all(20),
-            child: AvatarUploadWidget(imageUrl: "https://tva1.sinaimg.cn/large/006y8mN6gy1g7aa03bmfpj3069069mx8.jpg", isCircle: false)
+            child: AvatarUploadWidget(imageUrl: "https://pic.netbian.com/uploads/allimg/210810/231712-1628608632f5e9.jpg", isCircle: false)
         ),
-        // backgroundColor: Colors.grey[300]
+        backgroundColor: ColorsUtil.hexColor(0xEFEFEF)
     );
   }
 
