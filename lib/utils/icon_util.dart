@@ -39,4 +39,12 @@ class IconUtil {
   //日历
   static const IconData rili = IconData(0xe65f, fontFamily: family, fontPackage: null);
 
+  //向下
+  static const IconData xiangxia = IconData(0xec0b, fontFamily: family, fontPackage: null);
+  //向上
+  static const IconData xiangshang = IconData(0xec0c, fontFamily: family, fontPackage: null);
+
+  //时间
+  static const IconData shijian = IconData(0xe64d, fontFamily: family, fontPackage: null);
+
 }
