@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:yun_flutter_component/page/avatar_upload_page.dart';
 import 'package:yun_flutter_component/page/card_item_list_page1.dart';
+import 'package:yun_flutter_component/page/card_item_list_page2.dart';
 import 'package:yun_flutter_component/page/card_item_list_page3.dart';
+import 'package:yun_flutter_component/page/form_page.dart';
 import 'package:yun_flutter_component/page/image_upload_page.dart';
 import 'package:yun_flutter_component/page/setting_page.dart';
-import 'package:yun_flutter_component/page/card_item_list_page2.dart';
-import 'package:yun_flutter_component/page/form_page.dart';
-import 'package:yun_flutter_component/test/test_page1.dart';
 import 'package:yun_flutter_component/test/test_page2.dart';
 import 'package:yun_flutter_component/test/test_page3.dart';
 import 'package:yun_flutter_component/utils/navigator_util.dart';
@@ -57,7 +56,6 @@ class _MyHomePageState extends State<MyHomePage> {
               _getTextButton("头像上传组件", AvatarUploadPage()),
               _getTextButton("设置页面", SettingPage()),
               _getTextButton("表单组件页面", FormPage()),
-              _getTextButton("测试页面1", TestPage1()),
               _getTextButton("测试页面2", TestPage2()),
               _getTextButton("测试页面3", TestPage3()),
             ],
