@@ -8,6 +8,7 @@ import 'package:yun_flutter_component/page/image_upload_page.dart';
 import 'package:yun_flutter_component/page/setting_page.dart';
 import 'package:yun_flutter_component/test/test_page2.dart';
 import 'package:yun_flutter_component/test/test_page3.dart';
+import 'package:yun_flutter_component/test/test_page4.dart';
 import 'package:yun_flutter_component/utils/navigator_util.dart';
 
 void main() {
@@ -58,6 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
               _getTextButton("表单组件页面", FormPage()),
               _getTextButton("测试页面2", TestPage2()),
               _getTextButton("测试页面3", TestPage3()),
+              _getTextButton("测试页面4", TestPage4()),
             ],
           ),
         )
