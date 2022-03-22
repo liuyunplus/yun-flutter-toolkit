@@ -6,6 +6,7 @@ import 'package:yun_flutter_component/page/card_item_list_page3.dart';
 import 'package:yun_flutter_component/page/form_page.dart';
 import 'package:yun_flutter_component/page/image_upload_page.dart';
 import 'package:yun_flutter_component/page/setting_page.dart';
+import 'package:yun_flutter_component/task/feedback_list_page.dart';
 import 'package:yun_flutter_component/test/test_page2.dart';
 import 'package:yun_flutter_component/test/test_page3.dart';
 import 'package:yun_flutter_component/test/test_page4.dart';
@@ -60,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
               _getTextButton("测试页面2", TestPage2()),
               _getTextButton("测试页面3", TestPage3()),
               _getTextButton("测试页面4", TestPage4()),
+              _getTextButton("测试页面5", FeedbackListPage()),
             ],
           ),
         )
